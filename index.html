@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Form Validator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Modern Form Validator</h1>
+        <p>Une bibliothèque JavaScript légère pour valider des formulaires avec des animations élégantes</p>
+    </header>
+
+    <main>
+        <section class="demo-section">
+            <h2>Exemple d'Inscription</h2>
+            <form id="registrationForm" class="modern-form" novalidate>
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username"
+                           data-validate="required,minLength:3,maxLength:20,alphanumeric">
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email"
+                           data-validate="required,email">
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password"
+                           data-validate="required,minLength:8,password">
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmer le mot de passe</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword"
+                           data-validate="required,match:password">
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Âge</label>
+                    <input type="number" id="age" name="age"
+                           data-validate="required,number,min:18,max:120">
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="terms" name="terms"
+                           data-validate="required">
+                    <label for="terms">J'accepte les termes et conditions</label>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">S'inscrire</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="demo-section">
+            <h2>Exemple de Contact</h2>
+            <form id="contactForm" class="modern-form" novalidate>
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name"
+                           data-validate="required,minLength:2">
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactEmail">Email</label>
+                    <input type="email" id="contactEmail" name="contactEmail"
+                           data-validate="required,email">
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Téléphone</label>
+                    <input type="tel" id="phone" name="phone"
+                           data-validate="phone">
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <select id="subject" name="subject" data-validate="required">
+                        <option value="">Sélectionnez un sujet</option>
+                        <option value="support">Support technique</option>
+                        <option value="sales">Ventes</option>
+                        <option value="billing">Facturation</option>
+                        <option value="other">Autre</option>
+                    </select>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5"
+                              data-validate="required,minLength:10,maxLength:500"></textarea>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">Envoyer</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <section class="usage-section">
+        <h2>Comment utiliser Modern Form Validator</h2>
+        <pre class="code-block">
+// 1. Inclure le script
+&lt;script src="js/formValidator.js"&gt;&lt;/script&gt;
+
+// 2. Initialiser le validateur
+const validator = new ModernFormValidator('#myForm', {
+    // Options de configuration (facultatif)
+    animationDuration: 300,
+    errorClass: 'error',
+    successClass: 'success',
+    onSuccess: function(form) {
+        console.log('Formulaire valide!', form);
+    }
+});
+
+// 3. Ajouter des attributs data-validate sur les champs
+&lt;input type="text" name="username"
+    data-validate="required,minLength:3,maxLength:20"&gt;
+</pre>
+    </section>
+
+    <footer>
+        <p>Créé par <a href="https://github.com/eryaz2025" target="_blank">Eryaz</a></p>
+    </footer>
+</div>
+
+<script src="js/formValidator.js"></script>
+<script>
+    // Initialisation des formulaires de démonstration
+    document.addEventListener('DOMContentLoaded', function() {
+        const registrationValidator = new ModernFormValidator('#registrationForm', {
+            onSuccess: function(form) {
+                alert('Formulaire d\'inscription soumis avec succès!');
+                form.reset();
+            }
+        });
+
+        const contactValidator = new ModernFormValidator('#contactForm', {
+            onSuccess: function(form) {
+                alert('Formulaire de contact soumis avec succès!');
+                form.reset();
+            }
+        });
+    });
+</script>
+</body>
+</html>
